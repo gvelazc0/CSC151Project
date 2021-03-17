@@ -226,7 +226,7 @@ public class Policy
       The getPricePolicy method calculates and returns the Price of the Insurance Policy.
       @return The price of the policy.
    */
-   public double getPricePolicy(int a, String smokStat)
+   public double getPricePolicy()
    {
      final double BASE_FEE = 600,
                   AGE_OVER50_FEE = 75,
@@ -236,9 +236,9 @@ public class Policy
                BMI_THRESHOLD = 35;     
      double fee = BASE_FEE;
 
-     if (a > AGE_THRESHOLD)
+     if (age > AGE_THRESHOLD)
          fee += AGE_OVER50_FEE;           
-     if (smokStat.equalsIgnoreCase("smoker"))
+     if (smokingStatus.equalsIgnoreCase("smoker"))
          fee += SMOKER_FEE;       
      if (getBMI() > BMI_THRESHOLD) 
          fee += ((getBMI() - BMI_THRESHOLD) * ADDITIONAL_FEE_BMI);
