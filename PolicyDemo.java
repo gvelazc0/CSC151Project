@@ -24,6 +24,10 @@ public class PolicyDemo
     
       //Create an array list to store objects. The ArrayList will hold Policy objects.
       ArrayList<Policy> policies = new ArrayList<Policy>();   
+      
+      //Create an array list to store objects. The ArrayList will hold PolicyHolder objects.
+      ArrayList<PolicyHolder> policiesHolder = new ArrayList<PolicyHolder>();   
+
    
       try 
       {        
@@ -56,12 +60,18 @@ public class PolicyDemo
             if(inputFile.hasNext())
                inputFile.nextLine(); //this handles the end of the file to avoid an exception
             
+            //Create PolicyHolder objects using the PolicyHolder class type - we are still under the while loop. Objects will be created as long as there are records in the file to read.
+            PolicyHolder polHolder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+   
+            //Add PolicyHolder objects to the ArrayList (Note: policies is the reference variable for the ArrayList and polHolder is the reference variable for the PolicyHolder objects)
+            policiesHolder.add(polHolder);
             
             //Create Policy objects using the Policy class type - we are still under the while loop. Objects will be created as long as there are records in the file to read.
-            Policy pol = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight);
+            Policy pol = new Policy(policyNumber, providerName, polHolder);
    
             //Add Policy objects to the ArrayList (Note: policies is the reference variable for the ArrayList and pol is the reference variable for the Policy objects)
             policies.add(pol);
+ 
             
          } //end while
      
@@ -72,26 +82,22 @@ public class PolicyDemo
          //Display output using for loop
          for(int i =0; i < policies.size(); i++)
          { 
-            System.out.println("Policy Number: " + policies.get(i).getPolicyNumber());
-            System.out.println("Provider Name: " + policies.get(i).getProviderName());
-            System.out.println("Policyholder's First Name: " + policies.get(i).getFirstName());
-            System.out.println("Policyholder's Last Name: " + policies.get(i).getLastName());
-            System.out.println("Policyholder's Age: " + policies.get(i).getAge());
-            System.out.println("Policyholder's Smoking Status: " + policies.get(i).getSmokingStatus());
-            System.out.printf("Policyholder's Height: %.1f inches", policies.get(i).getHeight());
-            System.out.printf("\nPolicyholder's Weight: %.1f pounds", policies.get(i).getWeight());
-            System.out.printf("\nPolicyholder's BMI: %.2f", policies.get(i).getBMI());
-            System.out.printf("\nPolicy Price: $%.2f", policies.get(i).getPricePolicy());           
+            System.out.print(policies.get(i).toString());
+            System.out.println(policiesHolder.get(i).toString());
+            System.out.printf("Policy Price: $%.2f", policies.get(i).getPricePolicy());           
             System.out.println("\n");
             
-            if(policies.get(i).getSmokingStatus().equalsIgnoreCase("smoker")) //keep track of the number of smokers
+            if(policiesHolder.get(i).getSmokingStatus().equalsIgnoreCase("smoker")) //keep track of the number of smokers
                numSmokers++;
-
+           
          } //end for
+     
+      //Display the number of Policy objects that were created
+      //System.out.println("There were " + policies.getPolicyCount() + " Policy objects created");  
          
       //Display the number of smokers and non-smokers
       System.out.println("The number of policies with a smoker is: " + numSmokers);   
-      System.out.println("The number of policies with a non-smoker is: " + (policies.size() - numSmokers));   
+      System.out.println("The number of policies with a non-smoker is: " + (policiesHolder.size() - numSmokers));   
       
 
       } //close the "try" block of code
@@ -146,4 +152,27 @@ public class PolicyDemo
             System.out.printf("\nPolicyholder's Weight: %.1f pounds", pol.getWeight());
             System.out.printf("\nPolicyholder's BMI: %.2f", pol.getBMI());
             System.out.printf("\nPolicy Price: $%.2f", pol.getPricePolicy());
+*/
+
+
+/*
+         //Display output using for loop
+         for(int i =0; i < policies.size(); i++)
+         { 
+            System.out.println("Policy Number: " + policies.get(i).getPolicyNumber());
+            System.out.println("Provider Name: " + policies.get(i).getProviderName());
+            System.out.println("Policyholder's First Name: " + policiesHolder.get(i).getFirstName());
+            System.out.println("Policyholder's Last Name: " + policiesHolder.get(i).getLastName());
+            System.out.println("Policyholder's Age: " + policiesHolder.get(i).getAge());
+            System.out.println("Policyholder's Smoking Status: " + policiesHolder.get(i).getSmokingStatus());
+            System.out.printf("Policyholder's Height: %.1f inches", policiesHolder.get(i).getHeight());
+            System.out.printf("\nPolicyholder's Weight: %.1f pounds", policiesHolder.get(i).getWeight());
+            System.out.printf("\nPolicyholder's BMI: %.2f", policiesHolder.get(i).getBMI());
+            System.out.printf("\nPolicy Price: $%.2f", policies.get(i).getPricePolicy());           
+            System.out.println("\n");
+            
+            if(policiesHolder.get(i).getSmokingStatus().equalsIgnoreCase("smoker")) //keep track of the number of smokers
+               numSmokers++;
+
+         } //end for
 */
